@@ -21,7 +21,7 @@ public class OrderService {
         //// 2.1 获取url路径
         //String url="http://localhost:8081/user/"+order.getUserId();
 
-        // 修改访问的url路径，用服务名代替ip、端口：
+        // 修改访问的url路径，用服务名代替ip、端口：  application: name: userservice
         String url="http://userservice/user/"+order.getUserId();
         // 2.2 发送http请求，实现远程调用
         User user = restTemplate.getForObject(url, User.class);
