@@ -29,6 +29,8 @@ public class OrderApplication {
         return new RestTemplate();
     }
 
+
+    // 自定义负载均衡策略.通过定义IRule实现可以修改负载均衡规则：方式一
     @Bean
     public IRule randomRule(){
         return new RandomRule();

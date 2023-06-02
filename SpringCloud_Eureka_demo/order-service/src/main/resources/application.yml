@@ -25,3 +25,8 @@ eureka:
     service-url:  # eureka的地址信息
       defaultZone: http://localhost:10086/eureka/
 
+ribbon:
+  eager-load:
+    enabled: true # 开启饥饿加载
+    clients: # 指定饥饿加载的服务名称
+      - userservice

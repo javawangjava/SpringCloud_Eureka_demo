@@ -101,8 +101,9 @@ public class SpringCloudNotes {
     *       默认的实现就是ZoneAvoidanceRule，是一种轮询方案。
     *
     *   自定义负载均衡策略
-    *       通过定义IRule实现可以修改负载均衡规则，有两种方式：
+    *       通过定义IRule实现可以修改负载均衡规则，有两种方式：注意，一般用默认的负载均衡规则，不做修改。
     *       【自定义负载均衡策略方式一】：在服务消费者的配置类【启动类】中定义一个新的IRule:
+    *           这种是修改全局的负载均衡策略，只要是本服务作为消费者，那么所消费的服务都是采用改策略.
     *           @Bean
     *           public IRule randomRule(){
     *               return new RandomRule();
