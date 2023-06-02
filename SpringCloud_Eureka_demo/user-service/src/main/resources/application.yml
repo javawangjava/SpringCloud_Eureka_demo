@@ -6,8 +6,6 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.jdbc.Driver
-  application:
-    name: userservice
 
 mybatis:
   type-aliases-package: com.wang.user.pojo
@@ -19,8 +17,3 @@ logging:
     com.wang: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
-
-eureka:
-  client:
-    service-url:  # eureka的地址信息
-      defaultZone: http://localhost:10086/eureka/

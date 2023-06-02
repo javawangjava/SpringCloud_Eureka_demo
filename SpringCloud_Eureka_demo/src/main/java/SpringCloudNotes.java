@@ -110,8 +110,33 @@ public class SpringCloudNotes {
     * 饥饿加载
     *   Ribbon默认是采用懒加载，即第一次访问时才会去创建LoadBalanceClient，请求时间会很长。
     *   而饥饿加载则会在项目启动时创建，降低第一次访问的耗时，通过下面配置开启饥饿加载：
+    * */
+
+    /*
     *
+    * Nacos注册中心:
+    *   Nacos需要安装；不需要单独建立一个服务。
+    *   Nacos是阿里巴巴的产品，现在是SpringCloud中的一个组件。相比Eureka功能更加丰富.
+    *   Nacos是SpringCloudAlibaba的组件，而SpringCloudAlibaba也遵循SpringCloud中定义的服务注册、服务发现规范。
+    *   1）引入依赖:父工程的pom文件中的 <dependencyManagement> 中引入SpringCloudAlibaba的依赖：<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+    *   2）配置nacos地址: 在服务中的yml文件中添加nacos地址；
+    *
+    *   1.Nacos服务分级存储模型
+    *       1.1一级是服务，例如userservice；
+    *       1.2二级是集群，例如杭州或上海；
+    *       1.3三级是实例，例如杭州机房的某台部署了userservice的服务器；
+    *   2.如何设置实例的集群属性
+    *   2.1修改application.yml文件，添加spring.cloud.nacos.discovery.cluster-name属性即可
+    *
+    *  Nacos提供了namespace来实现环境隔离功能。
+    *       nacos中可以有多个namespace;
+    *       namespace下可以有group、service等;
+    *       不同namespace之间相互隔离，例如不同namespace的服务互相不可见;
+    *       默认情况下，所有service、data、group都在同一个namespace，名为public：
+    *       给微服务配置namespace:给微服务配置namespace只能通过修改配置来实现【命名空间，填ID】。
     *
     * */
+
+
 
 }

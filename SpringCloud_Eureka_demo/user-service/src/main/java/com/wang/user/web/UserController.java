@@ -4,10 +4,15 @@ import com.wang.user.pojo.User;
 import com.wang.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Slf4j
@@ -15,10 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 // 请求路径上加不加”/“都是一样的。
 //@RequestMapping("user")
 @RequestMapping("user")
+//实现配置热更新,在@Value注入的变量所在类上添加注解@RefreshScope：
+@RefreshScope
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    // 配置文件的属性注入
+    @Value("${pattern.dateformat}")
+    private String dateformat;
+
+    @GetMapping("now")
+    public String now(){
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));
+    }
 
     /**
      * 路径： /user/110
