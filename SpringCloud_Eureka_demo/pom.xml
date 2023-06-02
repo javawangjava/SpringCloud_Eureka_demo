@@ -92,6 +92,7 @@
                 <version>2.3.9.RELEASE</version>
             </plugin>
         </plugins>
+
     </build>
 
 </project>

@@ -1,5 +1,6 @@
 package com.wang.user.web;
 
+import com.wang.user.config.PatternProperties;
 import com.wang.user.pojo.User;
 import com.wang.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,13 +28,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // 配置文件的属性注入
-    @Value("${pattern.dateformat}")
-    private String dateformat;
+    @Autowired
+    private PatternProperties patternProperties;
 
     @GetMapping("now")
     public String now(){
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(patternProperties.getDateformat()));
     }
 
     /**
