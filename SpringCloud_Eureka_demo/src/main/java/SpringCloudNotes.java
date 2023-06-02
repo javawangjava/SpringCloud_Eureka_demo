@@ -135,6 +135,17 @@ public class SpringCloudNotes {
     *       默认情况下，所有service、data、group都在同一个namespace，名为public：
     *       给微服务配置namespace:给微服务配置namespace只能通过修改配置来实现【命名空间，填ID】。
     *
+    *   Nacos配置共享
+    *       1.微服务会从nacos读取的配置文件：
+    *           1.1、[服务名]-[spring.profile.active].yaml，环境配置;
+    *           1.2、[服务名].yaml，默认配置，多环境共享;
+
+    *       2.不同微服务共享的配置文件：
+    *           2.1、通过shared-configs指定;
+    *           2.2、通过extension-configs指定;
+    *       3.优先级：
+    *           3.1、环境配置 >服务名.yaml > extension-config > extension-configs > shared-configs > 本地配置;
+    *
     * */
 
 
