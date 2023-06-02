@@ -75,5 +75,43 @@ public class SpringCloudNotes {
      *
      * */
 
+    /*
+     *
+     * Ribbon负载均衡
+     *   负载均衡原理：SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载均衡功能的。
+     *   SpringCloudRibbon的底层采用了一个拦截器，拦截了RestTemplate发出的请求，对地址做了修改。
+     *
+     *   负载均衡策略
+     *       负载均衡的规则都定义在IRule接口中。
+     *       RoundRobinRule:简单轮询服务列表来选择服务器。它是Ribbon默认的负载均衡规则。
+     *       ZoneAvoidanceRule:以区域可用的服务器为基础进行服务器的选择。使用Zone对服务器进行分类，这个Zone可以理解为一个机房、一个机架等。而后再对Zone内的多个服务做轮询。
+     *       默认的实现就是ZoneAvoidanceRule，是一种轮询方案。
+     *
+     *   自定义负载均衡策略
+     *       通过定义IRule实现可以修改负载均衡规则，有两种方式：注意，一般用默认的负载均衡规则，不做修改。
+     *       【自定义负载均衡策略方式一】：在服务消费者的配置类【启动类】中定义一个新的IRule:
+     *           这种是修改全局的负载均衡策略，只要是本服务作为消费者，那么所消费的服务都是采用改策略.
+     *           @Bean
+     *           public IRule randomRule(){
+     *               return new RandomRule();
+     *           }
+     *
+     *       【自定义负载均衡策略方式二】：在服务消费者的配置文件application.yml文件中，添加有关服务提供者的新的配置
+     *       服务提供者: # 给某个微服务配置负载均衡规则，这里是userservice服务
+     *           ribbon:
+     *               NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡规则
+     *
+     *
+     *
+     * */
+
+
+    /*
+    * 饥饿加载
+    *   Ribbon默认是采用懒加载，即第一次访问时才会去创建LoadBalanceClient，请求时间会很长。
+    *   而饥饿加载则会在项目启动时创建，降低第一次访问的耗时，通过下面配置开启饥饿加载：
+    *
+    *
+    * */
 
 }

@@ -28,10 +28,10 @@ public class OrderApplication {
         return new RestTemplate();
     }
 
-    @Bean
-    public IRule randomRule(){
-        return new RandomRule();
-    }
-
+    //一般用默认的负载均衡规则，不做修改。也就是不用声明这个Bean
+    //@Bean
+    //public IRule randomRule(){
+    //    return new RandomRule();
+    //}
 
 }
