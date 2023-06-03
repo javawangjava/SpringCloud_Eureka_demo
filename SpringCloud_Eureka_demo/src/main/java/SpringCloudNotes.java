@@ -148,6 +148,26 @@ public class SpringCloudNotes {
     *
     * */
 
+    /*
+    *   Feign远程调用
+    *       Feign是一个声明式的http客户端，其作用就是帮助我们优雅的实现http请求的发送。
+    *       使用Feign的步骤：
+    *           1.服务消费者的pom中引入依赖：<artifactId>spring-cloud-starter-openfeign</artifactId>；
+    *           2.在服务消费者的启动类上添加@EnableFeignClients注解开启Feign的功能；
+    *           3.在服务消费者的模块中编写FeignClient接口；接口中方法主要是基于SpringMVC的注解来声明远程调用的信息。
+    *               服务名称：userservice；请求方式：GET；请求路径：/user/{id}；请求参数：Long id；返回值类型：User。
+    *               @FeignClient("userservice")
+    *               public interface UserClient {
+    *                   @GetMapping("/user/{id}")
+    *                   User findById(@PathVariable("id") Long id);
+    *               }
+    *           4.在服务消费者要调用服务提供者的方法中使用FeignClient中定义的方法代替RestTemplate。
+    *               4.1.在该类中注入FeignClient的对象，然后使用FeignClient对象来调用FeignClient中定义的方法来对服务消费者进行远程调用。
+    *
+    *
+    *
+    * */
+
 
 
 }
