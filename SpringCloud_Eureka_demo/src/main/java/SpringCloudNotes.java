@@ -164,8 +164,36 @@ public class SpringCloudNotes {
     *           4.在服务消费者要调用服务提供者的方法中使用FeignClient中定义的方法代替RestTemplate。
     *               4.1.在该类中注入FeignClient的对象，然后使用FeignClient对象来调用FeignClient中定义的方法来对服务消费者进行远程调用。
     *
+    *   Feign的日志配置:
+    *   1.方式一是配置文件，feign.client.config.xxx.loggerLevel；
+    *       1.1如果xxx是default则代表全局；
+    *       1.2如果xxx是服务名称，例如userservice则代表某服务；
+    *   2.方式二是java代码配置Logger.Level这个Bean；
+    *       2.1如果在@EnableFeignClients注解声明则代表全局；
+    *       2.2如果在@FeignClient注解中声明则代表某服务；
     *
     *
+    *   Feign的优化：Feign底层发起http请求，依赖于其它的框架。
+    *       1.日志级别尽量用basic
+    *       2.使用HttpClient或OKHttp代替URLConnection
+    *           ① 在服务消费者的pom文件中引入Apache的HttpClient依赖：<artifactId>feign-httpclient</artifactId>;
+    *           ② 在配置文件开启httpClient功能，设置连接池参数。
+    *
+    *
+    *   Feign的最佳实践：
+    *       1.让controller和FeignClient继承同一接口；
+    *       2.将FeignClient、POJO、Feign的默认配置都定义到一个项目中，供所有消费者使用。
+    *
+    *       实现最佳实践方式二的步骤如下：
+    *           首先创建一个module，命名为feign-api，然后引入feign的starter依赖
+    *           将order-service中编写的UserClient、User、DefaultFeignConfiguration都复制到feign-api项目中
+    *           在order-service中引入feign-api的依赖
+    *           修改order-service中的所有与上述三个组件有关的import部分，改成导入feign-api中的包
+    *           重启测试
+    *       不同包的FeignClient的导入有两种方式：
+    *           1.在@EnableFeignClients注解中添加basePackages，指定FeignClient所在的包@EnableFeignClients(clients = UserClient.class)；
+    *           2.在@EnableFeignClients注解中添加clients，指定具体FeignClient的字节码：@EnableFeignClients(clients = {UserClient.class})；
+
     * */
 
 
